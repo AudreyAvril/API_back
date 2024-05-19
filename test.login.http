@@ -1,0 +1,56 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+
+
+### Page 404
+GET {{endpoint}}/truc
+
+
+##########################  FEATURE LOGIN  #################################
+
+### connexion avec un identifiant et mot de passe correct
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*"
+}
+
+### connexion avec un identifiant incorrect
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.fr",
+  "password": "Testpassword1*"
+}
+
+### connexion avec un mot de passe incorrect
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.fr",
+  "password": "Testpassword12*"
+}
+
+### connexion avec identifiant manquant
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "password": "Testpassword12*"
+}
+
+### connexion avec un mot de passe manquant
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.fr"
+}
+
+
+
+

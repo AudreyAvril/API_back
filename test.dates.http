@@ -1,0 +1,212 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+@route=dates
+
+
+###  LOGIN CLIENT
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*"
+}
+
+###  LOGIN ADMIN
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "noemie@gmail.fr",
+  "password": "noemienoemie"
+}
+
+
+#########################  FEATURE /PLACES  #####################
+
+#######  GET  ########
+
+### VISITEUR (non autorisé) = récupération de toutes les dates
+GET {{endpoint}}/{{route}}
+
+
+### ADMIN (autorisé) = récupération de toutes les dates
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MTAzNTYwfQ.AyhzioqZf72CQLU68M2beVueRVBj8aRZ9lm4qsiZfYk
+
+### CLIENT (autorisé) = récupération de toutes les dates
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+
+#######  POST  ########
+
+
+### VISITEUR (non autorisé) = creation d'une date
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+
+{
+  "date" : "2024-10-06T00:00:00.000Z",
+  "status" : "true"
+}
+
+### ADMIN (autorisé) = creation d'une date
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MTAzNTYwfQ.AyhzioqZf72CQLU68M2beVueRVBj8aRZ9lm4qsiZfYk
+
+{
+  "date" : "2024-10-05T00:00:00.000Z",
+  "status" : true
+}
+
+### CLIENT (non autorisé) = creation d'une date
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+{
+  "date" : "2024-10-06T00:00:00.000Z",
+  "status" : true
+}
+
+
+### ADMIN (autorisé) = creation d'une date au mauvais format
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : "2024/06",
+  "status" : true
+}
+
+###  ADMIN (autorisé) = creation d'une date avec une valeur manquante
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "status" : true
+}
+
+### ADMIN (autorisé) = creation d'une date avec mauvais type de valeur
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : true,
+  "status" : true
+}
+
+
+#########################  FEATURE DATES/:id  #####################
+
+#######  GET  ########
+
+### VISITEUR (non autorisé) = récupération d'une date avec un id
+GET {{endpoint}}/{{route}}/2
+
+### ADMIN (autorisé) = récupération d'une date avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+### CLIENT (non autorisé) = récupération d'une date avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+### ADMIN (autorisé) = récupération d'une date avec un id qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/n
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+### ADMIN (autorisé) = récupération d'une date avec un id qui n'existe pas
+GET {{endpoint}}/{{route}}/20000
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+
+#######  PATCH  ########
+
+### VISITEUR (non autorisé) = Modification d'une date avec un id
+PATCH {{endpoint}}/{{route}}/26
+Content-Type: application/json
+
+{
+  "date" : "2024-04-10 00:00:00+00",
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une date avec un id
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : "2024-09-10 00:00:00+00",
+  "status" : true
+}
+
+### CLIENT (non autorisé) = Modification d'une date avec un id
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+{
+  "date" : "2024-09-10 00:00:00+00",
+  "status" : true
+}
+
+
+### ADMIN (autorisé) = Modification d'une date avec un id qui n'est pas un nombre
+PATCH {{endpoint}}/{{route}}/bip
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : "2024-09-10 00:00:00+00",
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une date avec un id qui n'existe pas
+PATCH {{endpoint}}/{{route}}/20000
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : "2024-09-10 00:00:00+00",
+  "status" : true
+}
+
+
+### ADMIN (autorisé) = Modification d'une date avec un mauvais format de date
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : "2024-09",
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une date avec une propriété manquante
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MSwibGFzdF9uYW1lIjoiRFVQT05EIiwiZmlyc3RfbmFtZSI6IlBpZXJyZSIsImVtYWlsIjoicGR1cG9uZEBvcmFuZ2UuY29tIiwicGhvbmUiOiIwNjA2MDYwNjA2IiwiYWRyZXNzIjoiMjQgcnVlIGR1IHBhcmFkaXMiLCJ6aXBfY29kZSI6IjM4MTAwIiwiY2l0eSI6IkdSRU5PQkxFIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiY2xpZW50IiwiYWdyZWVtZW50Ijp0cnVlLCJjcmVhdGVkX2F0IjoiMjAyNC0wNC0yM1QxNDoyOToxNi4yNDJaIiwidXBkYXRlZF9hdCI6bnVsbCwic291cmNlIjoiYXBpIn0sImlhdCI6MTcxNTU4Mjk0OX0.tGk3NBiXUe7B4537F9ayrmRIYWx4HnnVuD15FKSg2Ho
+
+{
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une date avec une propriété avec un mauvais type
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "date" : false,
+  "status" : true
+}
+
+

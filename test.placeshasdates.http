@@ -1,0 +1,189 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+@route=placeshasdates
+
+### Page 404
+GET {{endpoint}}/truc
+
+###  LOGIN CLIENT
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*"
+}
+
+###  LOGIN ADMIN
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "noemie@gmail.fr",
+  "password": "noemienoemie"
+}
+
+
+#########################  FEATURE /PLACESHASDATES  #####################
+
+#####  GET  #####
+
+### VISITEUR (non autorisé) = récupération de toutes les associations dates/Lieux
+GET {{endpoint}}/{{route}}
+
+### ADMIN (autorisé) = récupération de toutes les associations dates/Lieux
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+### CLIENT (non autorisé) = récupération de toutes les associations dates/Lieux
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+
+#####  POST  #####
+
+### VISITEUR (non autorisé) = creation d'une association date/lieu
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+
+{
+  "delivery_date_id" : 3,
+  "delivery_place_id":  3
+}
+
+### ADMIN (autorisé) = creation d'une association date/lieu
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : 3,
+  "delivery_place_id":  3
+}
+
+
+### CLIENT (non autorisé) = creation d'une association date/lieu
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+{
+  "delivery_date_id" : 3,
+  "delivery_place_id":  3
+}
+
+
+### ADMIN (autorisé) = creation d'une association date/lieu avec propriétés manquantes
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_place_id":  3
+}
+
+### ADMIN (autorisé) = creation d'une association date/lieu avec une propriété avec un mauvais type
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : true,
+  "delivery_place_id":  "3"
+}
+
+
+
+#########################  FEATURE /PLACESHASDATES/:id  #####################
+
+#####  GET  #####
+
+### VISITEUR (non autorisé) = récupération d'une association date/lieu avec un id
+GET {{endpoint}}/{{route}}/2
+
+### ADMIN (autorisé) = récupération d'une association date/lieu avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+### CLIENT (non autorisé) = récupération d'une association date/lieu avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+### ADMIN (autorisé) = récupération d'une association date/lieu avec un id qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/n
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+### ADMIN (autorisé) = récupération d'une association date/lieu avec un id qui n'existe pas
+GET {{endpoint}}/{{route}}/20000
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+
+######  PATCH  ######
+
+### VISITEUR (non autorisé) = Modification d'une association date/lieu par son id
+PATCH {{endpoint}}/{{route}}/2
+
+### ADMIN (autorisé) = Modification d'une association date/lieu par son id
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : 4,
+  "delivery_place_id":  3
+}
+
+### CLIENT (non autorisé) = Modification d'une association date/lieu par son id
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+{
+  "delivery_date_id" : 4,
+  "delivery_place_id":  3
+}
+
+
+### ADMIN (autorisé) = Modification d'une association date/lieu par un id qui n'est pas un nombre
+PATCH {{endpoint}}/{{route}}/bip
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : 4,
+  "delivery_place_id":  3
+}
+
+### ADMIN (autorisé) = Modification d'une association date/lieu avec un id qui n'existe pas
+PATCH {{endpoint}}/{{route}}/20000
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : 4,
+  "delivery_place_id":  3
+}
+
+### ADMIN (autorisé) = Modification d'une association date/lieu avec une propriété manquante
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : 4
+}
+
+### ADMIN (autoisé) = Modification d'une association date/lieu avec une propriété avec le mauvais type
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDQyfQ.eH29Z-vJgO06MXXpGio4Ox3etf41jbsQWDeRzkstxsE
+
+{
+  "delivery_date_id" : true,
+  "delivery_place_id":  3
+}
+
+
+

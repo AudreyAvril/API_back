@@ -1,0 +1,32 @@
+{
+  "name": "projet-back",
+  "version": "1.0.0",
+  "description": "API qui permet l'enregistrement de commandes produits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "npx nodemon index.js",
+    "db:create": "psql -U utilisateur -d database -f data/createTable.sql",
+    "db:seed": "psql -U utilisateur -d database -f data/seeding.sql",
+    "db:reset": "npm run db:create && npm run db:seed"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "email-validator": "^2.0.4",
+    "express": "^4.18.2",
+    "joi": "^17.12.1",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1"
+  }
+}

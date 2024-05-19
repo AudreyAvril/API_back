@@ -1,0 +1,144 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+
+
+### Page 404
+GET {{endpoint}}/truc
+
+
+
+#########################  FEATURE SIGNUP  #################################
+
+### inscription avec un mail et mot de passe correct
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Paul",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "passwordConfirm": "Testpassword1*"
+}
+
+### inscription avec un mail déjà dans la base
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Pierre",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "dmars@gmail.com",
+  "password": "Testpassword2*",
+  "passwordConfirm": "Testpassword2*"
+}
+
+### inscription avec un email qui n'est pas un email
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Jacques",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "jfevriergmail.com",
+  "password": "Testpassword1*",
+  "passwordConfirm": "Testpassword1*"
+}
+
+### inscription avec un mot de passe qui ne répond pas aux critères
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Jacques",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "jfevrier@gmail.com",
+  "password": "Testpassword1",
+  "passwordConfirm": "Testpassword1"
+}
+
+
+### inscription avec un mot de passe confirmé qui n'est pas le même que le mot de passe
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Jacques",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "jfevrier@gmail.com",
+  "password": "Testpassword12*",
+  "passwordConfirm": "Testpassword1*"
+}
+
+### inscription avec une information manquante
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Jacques",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+
+  "status": false,
+  "role": "client",
+  "agreement": true,
+  "email": "jfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "passwordConfirm": "Testpassword1*"
+}
+
+### inscription avec une propriété avec un mauvais type
+POST {{endpoint}}/signup
+Content-Type: application/json
+
+{
+  "last_name" : "Fevrier",
+  "first_name":  "Jacques",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": true,
+  "agreement": true,
+  "email": "jfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "passwordConfirm": "Testpassword1*"
+}

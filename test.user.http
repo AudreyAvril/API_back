@@ -1,0 +1,259 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+@route=users
+
+###  LOGIN CLIENT
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*"
+}
+
+###  LOGIN ADMIN
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "noemie@gmail.fr",
+  "password": "noemienoemie"
+}
+
+
+#########################  FEATURE USERS  #################################
+
+### VISITEUR (non-autorisé) = récupération de la liste des utilisateurs
+GET {{endpoint}}/{{route}}
+
+### ADMIN (autorisé) = récupération de la liste des utilisateurs
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDU0MjkzfQ.QIoFdSnZt6FWQLDf1XQmQH1JAugEQDvXlg76YhtuGks
+
+### CLIENT (non autorisé) = récupération de la liste des utilisateurs
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+#########################  FEATURE USERS/:id  ##############################
+
+### GET ###
+
+### VISITEUR (non-autorisé) = récupération d'un utilisateur avec un id
+GET {{endpoint}}/{{route}}/3
+
+### ADMIN (autorisé) = récupération d'un utilisateur avec un id
+GET {{endpoint}}/{{route}}/3
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDU0MjkzfQ.QIoFdSnZt6FWQLDf1XQmQH1JAugEQDvXlg76YhtuGks
+
+### CLIENT (autorisé) = récupération d'un utilisateur avec un id
+GET {{endpoint}}/{{route}}/3
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+### CLIENT ou ADMIN (autorisé) = récupération d'un utilisateur avec un id qui n'existe pas
+GET {{endpoint}}/{{route}}/10000
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+### CLIENT ou ADMIN (autorisé) = récupération d'un utilisateur avec un id qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/h
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+### PATCH ###
+
+### VISITEUR (non autorisé) = Modification d'un utilisateur par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+
+{
+  "first_name":  "Paul",
+  "last_name" : "Fevrier",
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "phone": "0202020202", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true
+}
+
+### ADMIN (autorisé) = Modification d'un utilisateur par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDU0MjkzfQ.QIoFdSnZt6FWQLDf1XQmQH1JAugEQDvXlg76YhtuGks
+
+{
+  "first_name":  "Paul",
+  "last_name" : "Fevrier",
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "phone": "0101010101", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": true,
+  "role": "client",
+  "agreement": true
+}
+
+### CLIENT (autorisé) = Modification d'un utilisateur par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+{
+  "first_name":  "Paul",
+  "last_name" : "Fevrier",
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*",
+  "phone": "0202020202", 
+  "zip_code" : "25500",
+  "adress" : "3 rue des lilas",
+  "city": "grenoble",
+  "status": false,
+  "role": "client",
+  "agreement": true
+}
+
+
+
+#########################  FEATURE /USERS/:id/ORDERS  #####################
+
+######   GET   ######
+
+### VISITEUR (non-autorisé) = récupération de toutes les commandes d'un client par son id
+GET {{endpoint}}/{{route}}/1/orders
+
+### ADMIN (non-autorisé) = récupération de toutes les commandes d'un client par son id
+GET {{endpoint}}/{{route}}/1/orders
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDU0MjkzfQ.QIoFdSnZt6FWQLDf1XQmQH1JAugEQDvXlg76YhtuGks
+
+### CLIENT (autorisé) = récupération de toutes les commandes d'un client par son id
+GET {{endpoint}}/{{route}}/1/orders
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+### CLIENT (autorisé) = récupération de toutes les commandes d'un client par un id qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/bip/orders
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+### CLIENT (autorisé) = récupération de toutes les commandes d'un client par un id qui n'existe pas
+GET {{endpoint}}/{{route}}/10000/orders
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+######   POST   ######
+
+### VISITEUR (non-autorisé) = creation d'une commande pour un utilisateur par son id
+POST {{endpoint}}/{{route}}/1/orders
+Content-Type: application/json
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### ADMIN (non-autorisé) = creation d'une commande pour un utilisateur par son id
+POST {{endpoint}}/{{route}}/1/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDU0MjkzfQ.QIoFdSnZt6FWQLDf1XQmQH1JAugEQDvXlg76YhtuGks
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### CLIENT (autorisé) = creation d'une commande pour un utilisateur par son id
+POST {{endpoint}}/{{route}}/1/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### CLIENT (autorisé) = creation d'une commande pour un utilisateur par un id qui n'est pas un nombre
+POST {{endpoint}}/{{route}}/n/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### CLIENT (autorisé) = creation d'une commande pour un utilisateur par un id qui n'existe pas
+POST {{endpoint}}/{{route}}/10000/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### CLIENT (autorisé) = creation d'une commande pour un utilisateur par un id avec une propriété manquante
+POST {{endpoint}}/{{route}}/1/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": 1,
+  "customer_id": 1,
+
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+### CLIENT (autorisé) = creation d'une commande pour un utilisateur par son id avec une propriété avec le mauvais type
+POST {{endpoint}}/{{route}}/1/orders
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzNzcyfQ.dI6R1mM9qc5WO9tcgB4IbMFWcH5sWIAOvuWbHgqsOSg
+
+
+{
+  "product_id": 1,
+  "quantity": 10,
+  "creator_id": true,
+  "customer_id": 1,
+  "delivery_place_id": 2,
+  "delivery_date_id": 2,
+  "price": 5.6
+}
+
+

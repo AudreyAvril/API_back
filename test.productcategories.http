@@ -1,0 +1,246 @@
+
+@endpoint=http://localhost:{{$dotenv PORT}}/api
+@route=product-categories
+
+### Page 404
+GET {{endpoint}}/truc
+
+###  LOGIN CLIENT
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "pfevrier@gmail.com",
+  "password": "Testpassword1*"
+}
+
+###  LOGIN ADMIN
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "noemie@gmail.fr",
+  "password": "noemienoemie"
+}
+
+
+#########################  FEATURE /PRODUCT-CATEGORIES  #####################
+
+########  GET  ########
+
+### VISITEUR (autorisé) = récupération de toutes les gammes de produit
+GET {{endpoint}}/{{route}}
+
+### ADMIN (autorisé) = récupération de toutes les gammes de produit
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+### CLIENT (autorisé) = récupération de toutes les gammes de produit
+GET {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+
+########  POST  ########
+
+### VISITEUR (non autorisé) = creation d'une gamme de produit
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+
+{
+  "name" : "Product",
+  "description":  "super product",
+  "photo": "Product-photo.webp", 
+  "status" : true
+}
+
+### ADMIN (autorisé) = creation d'une gamme de produit
+POST {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+Content-Type: application/json
+
+{
+  "name" : "Product",
+  "description":  "super product",
+  "photo": "Product-photo.webp", 
+  "status" : true
+}
+
+### CLIENT (non autorisé) = creation d'une gamme de produit
+POST {{endpoint}}/{{route}}
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+{
+  "name" : "Product",
+  "description":  "super product",
+  "photo": "Product-photo.webp", 
+  "status" : true
+}
+
+
+
+### ADMIN (autorisé) = création d'une gamme de produit avec une propriété manquante
+POST {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+Content-Type: application/json
+
+{
+  "name" : "Product",
+  "description":  "super product",
+
+  "status" : true
+}
+
+### ADMIN (autorisé) = creation d'une gamme de produit avec une propriété avec le mauvais type
+POST {{endpoint}}/{{route}}
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+Content-Type: application/json
+
+{
+  "name" : "Product",
+  "description":  true,
+  "photo": "Product-photo.webp", 
+  "status" : true
+}
+
+
+#########################  FEATURE /PRODUCT-CATEGORIES/:id  #####################
+
+###### GET  ######
+
+### VISITEUR (non autorisé) = récupération d'une gamme de produit avec un id
+GET {{endpoint}}/{{route}}/2
+
+### ADMIN (autorisé) = récupération d'une gamme de produit avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+
+### CLIENT (non autorisé) = récupération d'une gamme de produit avec un id
+GET {{endpoint}}/{{route}}/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+
+### ADMIN (autorisé) = récupération d'une gamme de produit avec un id qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/n
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+
+### ADMIN (autorisé) = récupération d'une gamme de produit avec un id qui n'existe pas
+GET {{endpoint}}/{{route}}/20000
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+
+
+
+###### PATCH  ######
+
+### VISITEUR (non autorisé) = Modification d'une gamme de produit par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une gamme de produit par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+### CLIENT (non autorisé) = Modification d'une gamme de produit par son id
+PATCH {{endpoint}}/{{route}}/3
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MTEsImxhc3RfbmFtZSI6IkZldnJpZXIiLCJmaXJzdF9uYW1lIjoiUGF1bCIsImVtYWlsIjoicGZldnJpZXJAZ21haWwuY29tIiwicGhvbmUiOiIwMTAxMDEwMTAxIiwiYWRyZXNzIjoiMyBydWUgZGVzIGxpbGFzIiwiemlwX2NvZGUiOiIyNTUwMCIsImNpdHkiOiJncmVub2JsZSIsInN0YXR1cyI6ZmFsc2UsInJvbGUiOiJjbGllbnQiLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA1LTE4VDE2OjI1OjQxLjMzMloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUwMDg1fQ.YXk9CJW9JAfe35jFjuJUZFTBWEA1Za_I9SZ2H-psekI
+
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+
+### ADMIN (autorisé) = Modification d'une gamme de produit par un id qui n'est pas un nombre
+PATCH {{endpoint}}/{{route}}/bip
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une gamme de produit avec un id qui n'existe pas
+PATCH {{endpoint}}/{{route}}/20000
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une gamme de produit avec une propriété manquante
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+{
+  "name" : "Product Test",
+  "description":  "Super test product",
+
+  "status" : true
+}
+
+### ADMIN (autorisé) = Modification d'une gamme de pain avec une propriété avec un mauvais type
+PATCH {{endpoint}}/{{route}}/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+{
+  "name" : "Product Test",
+  "description":  true,
+  "photo": "Producttest.webp", 
+  "status" : true
+}
+
+
+
+#########################  FEATURE /PRODUCT-CATEGORIES/:id/products  #####################
+
+### VISITEUR (autorisé) = récupération de la liste de produit d'une gamme avec l'id de la gamme
+GET {{endpoint}}/{{route}}/1/products
+
+### ADMIN (autorisé) = récupération de la liste de produit d'une gamme avec l'id de la gamme
+GET {{endpoint}}/{{route}}/1/products
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTA0LTIzVDE0OjI5OjE2LjI0MloiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzE2MDUzMjkwfQ.lBOxRsWILDYUSaWi7ktmBzlc2w9LSsoin_0B_PeRIVM
+
+### CLIENT (autorisé) = récupération de la liste de produit d'une gamme avec l'id de la gamme
+GET {{endpoint}}/{{route}}/1/products
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVXNlciI6eyJpZCI6MiwibGFzdF9uYW1lIjoiR0FERVNTQVVEIiwiZmlyc3RfbmFtZSI6Ik5vw6ltaWUiLCJlbWFpbCI6Im5vZW1pZUBnbWFpbC5mciIsInBob25lIjoiMDcwNzA3MDcwNyIsImFkcmVzcyI6InJ1ZSBkdSBwYXJjIiwiemlwX2NvZGUiOiIzODUwMCIsImNpdHkiOiJDSElSRU5TIiwic3RhdHVzIjp0cnVlLCJyb2xlIjoiYWRtaW4iLCJhZ3JlZW1lbnQiOnRydWUsImNyZWF0ZWRfYXQiOiIyMDI0LTAyLTE1VDE1OjAxOjA0LjY1NFoiLCJ1cGRhdGVkX2F0IjpudWxsfSwiaWF0IjoxNzA4MDY4NjA1fQ.Vzw5jnJEsowR4zB8bxSeyBX6dsqrJYi16_9rJ6RN2rc
+
+
+### récupération de la liste de produit d'une gamme avec l'id de la gamme qui n'est pas un nombre
+GET {{endpoint}}/{{route}}/n/products
+
+### récupération de la liste de produit d'une gamme avec l'id de la gamme qui n'existe pas
+GET {{endpoint}}/{{route}}/10000/products
